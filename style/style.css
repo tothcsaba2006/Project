@@ -374,3 +374,172 @@ header {
     .product-image-section, .product-details-section { width: 100%; }
     .nav-links { display: none; }
 }
+
+ .webshop-header {
+            text-align: center;
+            padding: 120px 20px 40px; /* Nagyobb felső padding a sticky header miatt */
+        }
+        
+        .webshop-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 2px solid #333;
+            color: #fff;
+            padding: 10px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: 0.3s all;
+            font-size: 14px;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            border-color: var(--accent-blue);
+            background: var(--accent-blue);
+            color: #000;
+        }
+
+        /* --- AUTH FORM STÍLUSOK --- */
+.auth-page {
+  padding: 60px 5%;
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-white);
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 920px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  border-radius: 16px;
+  padding: 30px;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+.auth-tabs {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.auth-tab {
+  background: transparent;
+  border: 1px solid #222;
+  color: var(--text-white);
+  padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.auth-tab.active {
+  background: var(--accent-blue);
+  color: #000;
+  border-color: var(--accent-blue);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.auth-form.hidden { display: none; }
+
+.auth-form h2 {
+  text-align: center;
+  color: var(--text-white);
+  margin-bottom: 6px;
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="email"],
+.auth-form input[type="password"] {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #0f0f0f;
+  color: var(--text-white);
+  outline: none;
+}
+
+.password-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-field .toggle-pass {
+  position: absolute;
+  right: 8px;
+  background: transparent;
+  border: none;
+  color: var(--text-gray);
+  cursor: pointer;
+  padding: 6px;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: var(--text-gray);
+}
+
+.remember input { margin-right: 8px; }
+
+.btn-primary {
+  align-self: center;
+  width: 100%;
+  max-width: 320px;
+}
+
+.form-msg {
+  min-height: 22px;
+  color: #ffcc00;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* jelszó erősség */
+.password-strength {
+  font-size: 13px;
+  color: var(--text-gray);
+}
+
+/* képernyőméret kisebb */
+@media (max-width: 768px) {
+  .auth-container { padding: 20px; }
+  .auth-form { max-width: 100%; }
+}
+
+/* segítő osztályok */
+.sr-only {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
