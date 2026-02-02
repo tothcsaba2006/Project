@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnkrsStore | Webshop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style/style.css">
+    
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo"><a href="index.html">SNKRS<span>STORE</span></a></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Főoldal</a></li>
+                <li><a href="webshop.html" class="active">Webshop</a></li>
+                <li><a href="#">Rólunk</a></li>
+                <li><a href="#">Kapcsolat</a></li>
+            </ul>
+            <div class="nav-icons">
+                <a href="#"><i class="fa-solid fa-user"></i></a>
+                <a href="#" class="cart-icon">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span id="cart-count">0</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="webshop-header">
+            <h1>Webshop</h1>
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterProducts('all')">Összes</button>
+                <button class="filter-btn" onclick="filterProducts('sneaker')">Sneakerek</button>
+                <button class="filter-btn" onclick="filterProducts('clothing')">Ruházat</button>
+            </div>
+        </section>
+
+        <section class="products" style="padding-top: 0;">
+            <div class="product-grid" id="product-container">
+                
+                <div class="product-card" data-category="sneaker" onclick="window.location.href='termek1.html';">
+                    <div class="img-container"><img src="../img/termek1.webp" alt="Nike AF1"></div>
+                    <div class="product-info">
+                        <span class="brand-name">Nike Air Force 1 07</span>
+                        <h3 class="model-name">Triple White</h3>
+                        <div class="product-footer">
+                            <p class="price">40.000FT</p>
+                            <i class="fa-solid fa-cart-shopping cart-btn-icon"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="sneaker" onclick="window.location.href='termek2.html';">
+                    <div class="img-container"><img src="../img/termek2.webp" alt="Nike AF1 Black"></div>
+                    <div class="product-info">
+                        <span class="brand-name">Nike Air Force 1</span>
+                        <h3 class="model-name">Black Chunky Rope</h3>
+                        <div class="product-footer">
+                            <p class="price">45.000FT</p>
+                            <i class="fa-solid fa-cart-shopping cart-btn-icon"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="clothing" onclick="window.location.href='#';">
+                    <div class="img-container"><img src="https://images.unsplash.com/photo-1556906781-9a412961d28c?auto=format&fit=crop&w=600&q=80" alt="Hoodie"></div>
+                    <div class="product-info">
+                        <span class="brand-name">Nike</span>
+                        <h3 class="model-name">Essentials Hoodie Grey</h3>
+                        <div class="product-footer">
+                            <p class="price">25.000FT</p>
+                            <i class="fa-solid fa-cart-shopping cart-btn-icon"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="sneaker" onclick="window.location.href='termek3.html';">
+                    <div class="img-container"><img src="../img/termek3.webp" alt="Nike AF1 Rope"></div>
+                    <div class="product-info">
+                        <span class="brand-name">Nike Air Force 1 Low</span>
+                        <h3 class="model-name">Black White Rope</h3>
+                        <div class="product-footer">
+                            <p class="price">49.000FT</p>
+                            <i class="fa-solid fa-cart-shopping cart-btn-icon"></i>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="product-card" data-category="clothing" onclick="window.location.href='#';">
+                    <div class="img-container"><img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=600&q=80" alt="T-Shirt"></div>
+                    <div class="product-info">
+                        <span class="brand-name">Jordan</span>
+                        <h3 class="model-name">Flight Graphic Tee</h3>
+                        <div class="product-footer">
+                            <p class="price">12.000FT</p>
+                            <i class="fa-solid fa-cart-shopping cart-btn-icon"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3 class="logo">SNKRS<span>STORE</span></h3>
+                <p><strong>Cím:</strong> Budapest, Váci utca 12.</p>
+                <p><strong>Telefon:</strong> +36 30 123 4567</p>
+                <p><strong>E-mail:</strong> info@snkrsstore.hu</p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Vásárlás</h4>
+                <ul>
+                    <li><a href="#">Összes termék</a></li>
+                    <li><a href="#">Újdonságok</a></li>
+                    <li><a href="#">Akciók</a></li>
+                    <li><a href="#">Mérettáblázat</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Információk</h4>
+                <ul>
+                    <li><a href="#">Rólunk</a></li>
+                    <li><a href="#">Szállítási információk</a></li>
+                    <li><a href="#">Általános Szerződési Feltételek</a></li>
+                    <li><a href="#">Adatkezelési tájékoztató</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Hírlevél</h4>
+                <p>Iratkozz fel, hogy ne maradj le az új dropokról!</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="E-mail címed" required>
+                    <button type="submit">Feliratkozás</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 SNKRSSTORE - Minden jog fenntartva.</p>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    
+    <script>
+        function filterProducts(category) {
+            const products = document.querySelectorAll('.product-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            // Gombok aktív állapotának kezelése
+            buttons.forEach(btn => {
+                if (btn.innerText.toLowerCase().includes(category === 'all' ? 'összes' : (category === 'sneaker' ? 'sneakerek' : 'ruházat'))) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // Termékek szűrése
+            products.forEach(product => {
+                if (category === 'all') {
+                    product.style.display = 'block';
+                } else {
+                    if (product.getAttribute('data-category') === category) {
+                        product.style.display = 'block';
+                    } else {
+                        product.style.display = 'none';
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
