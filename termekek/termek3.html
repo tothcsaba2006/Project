@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termék Részletei | SNKRSSTORE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo"><a href="index.html">SNKRS<span>STORE</span></a></div>
+            <ul class="nav-links">
+                <li><a href="../html/index.html">Főoldal</a></li>
+                <li><a href="../html/webshop.html" class="active">Webshop</a></li>
+                <li><a href="#">Ruházat</a></li>
+                <li><a href="#">Kosár</a></li>
+            </ul>
+            <div class="nav-icons">
+                <a href="#"><i class="fa-solid fa-user"></i></a>
+                <a href="#" class="cart-icon">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span id="cart-count">0</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="single-product-container">
+        <div class="product-image-section">
+            <img src="../img/termek3.webp" id="MainImg" alt="Fő kép">
+            <div class="small-img-group">
+                <div class="small-img-col"><img src="../img/termek3.webp" class="small-img"></div>
+                <div class="small-img-col"><img src="../img/termek3.1.webp" class="small-img"></div>
+                
+                 
+            </div>
+        </div>
+
+        <div class="product-details-section">
+            <h6>NIKE AIR FORCE 1 LOW 07 BLACK WHITE ROPE LACES</h6>
+            <h2>40.000FT</h2>
+            
+            <select class="size-select">
+                <option>Válassz méretet</option>
+                <option>40</option>
+                <option>41</option>
+                <option>42</option>
+            </select>
+            
+            <div class="purchase-controls">
+                <input type="number" value="1" min="1">
+                <button class="btn-buy">Kosárba</button>
+            </div>
+
+            <h4>Termékleírás</h4>
+            <p>A klasszikus fehér Nike Air Force 1 most egy teljesen egyedi kivitelben,BLACK ROPE LACES-el elérhető!</p>
+        </div>
+    </section>
+
+
+    <section class="related-products">
+        <div class="section-title">
+            <h2>Ez is érdekelhet</h2>
+            <p>Válogass hasonló termékeink közül</p>
+        </div>
+        <div class="product-grid">
+            <div class="product-card" onclick="window.location.href='termek31.html';">
+                <div class="img-container"><img src="../img/termek31.webp" alt=""></div>
+                <div class="product-info">
+                    <span class="brand-name">S Logo Zip Up</span>
+                    <h3 class="model-name">Hooded Sweatshirt</h3>
+                    <div class="product-footer">
+                        <p class="price">75.000FT</p>
+                        <i class="fa-solid fa-cart-shopping cart-btn-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card" onclick="window.location.href='termek31.html';">
+                <div class="img-container"><img src="../img/termek31.webp" alt=""></div>
+                <div class="product-info">
+                    <span class="brand-name">S Logo Zip Up</span>
+                    <h3 class="model-name">Hooded Sweatshirt</h3>
+                    <div class="product-footer">
+                        <p class="price">75.000FT</p>
+                        <i class="fa-solid fa-cart-shopping cart-btn-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card" onclick="window.location.href='termek3.html';">
+                <div class="img-container"><img src="../img/baroque.png" alt=""></div>
+                <div class="product-info">
+                    <span class="brand-name">NIKE AIR MAX 1</span>
+                    <h3 class="model-name">TRAVIS SCOTT CACTUS JACK</h3>
+                    <div class="product-footer">
+                        <p class="price">200.000FT</p>
+                        <i class="fa-solid fa-cart-shopping cart-btn-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-simple">
+        <p>&copy; 2024 SNKRSSTORE. Minden jog fenntartva.</p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script>
+        // Képváltó
+        var MainImg = document.getElementById("MainImg");
+        var smallimg = document.getElementsByClassName("small-img");
+        for(let i=0; i<smallimg.length; i++) {
+            smallimg[i].onclick = function() { MainImg.src = smallimg[i].src; }
+        }
+    </script>
+</body>
+</html>
