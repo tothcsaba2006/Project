@@ -38,6 +38,7 @@
         </div>
         
         <div class="product-grid">
+            
             <div class="product-card" onclick="window.location.href='../termekek/termek1.html';">
                 <div class="img-container"><img src="../img/termek1.webp" alt=""></div>
                 <div class="product-info">
@@ -45,7 +46,7 @@
                     <h3 class="model-name">Triple White</h3>
                     <div class="product-footer">
                         <p class="price">40.000FT</p>
-                        <i class="fa-solid fa-cart-shopping cart-btn-icon"></i>
+                        <i class="fa-solid fa-cart-shopping cart-btn-icon" data-id="1"></i>
                     </div>
                 </div>
             </div>
@@ -54,10 +55,10 @@
                 <div class="img-container"><img src="../img/termek2.webp" alt=""></div>
                 <div class="product-info">
                     <span class="brand-name">Nike Air Force 1 </span>
-                    <h3 class="model-name">Black Chunky Rope Laces Beige</h3>
+                    <h3 class="model-name">Black Chunky Rope</h3>
                     <div class="product-footer">
                         <p class="price">45.000FT</p>
-                        <i class="fa-solid fa-cart-shopping cart-btn-icon"></i>
+                        <i class="fa-solid fa-cart-shopping cart-btn-icon" data-id="2"></i>
                     </div>
                 </div>
             </div>
@@ -65,16 +66,41 @@
             <div class="product-card" onclick="window.location.href='../termekek/termek3.html';">
                 <div class="img-container"><img src="../img/termek3.webp" alt=""></div>
                 <div class="product-info">
-                    <span class="brand-name">NIKE AIR FORCE 1 LOW 07 </span>
+                    <span class="brand-name">NIKE AIR FORCE 1</span>
                     <h3 class="model-name">BLACK WHITE ROPE LACES</h3>
                     <div class="product-footer">
                         <p class="price">49.000FT</p>
-                        <i class="fa-solid fa-cart-shopping cart-btn-icon"></i>
+                        <i class="fa-solid fa-cart-shopping cart-btn-icon" data-id="3"></i>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-bottom">
+            <p>&copy; 2024 SNKRSSTORE - Minden jog fenntartva.</p>
+        </div>
+        </div>
+    </footer>
+
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Kosarad</h3>
+            <span class="close-cart" id="close-cart"><i class="fa-solid fa-xmark"></i></span>
+        </div>
+        <div class="cart-items" id="cart-items-container"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Összesen:</span>
+                <span id="sidebar-total">0 Ft</span>
+            </div>
+            <button class="btn-checkout" onclick="window.location.href='kosar.html'">Kosár megtekintése</button>
+        </div>
+    </div>
 
     <footer class="main-footer">
         <div class="footer-container">
@@ -123,6 +149,7 @@
             <p>&copy; 2024 SNKRSSTORE - Minden jog fenntartva.</p>
         </div>
     </footer>
+
     <script src="../js/script.js"></script>
 </body>
 </html>

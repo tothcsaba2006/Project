@@ -41,24 +41,32 @@
             </div>
         </div>
 
-        <div class="product-details-section">
-            <h6>Nike Air Force 1 Low Supreme White</h6>
-            <h2>40.000FT</h2>
+         <div class="product-details-section">
+            <h6>Nike Air Force 1 Low Supreme White/h6>
+            <h2>55.000FT</h2>
             
-            <select class="size-select">
-                <option>Válassz méretet</option>
-                <option>40</option>
-                <option>41</option>
-                <option>42</option>
+            <select class="size-select" id="product-size">
+                <option value="">Válassz méretet</option>
+                <option value="40">40</option>
+                <option value="41">41</option>
+                <option value="42">42</option>
             </select>
             
             <div class="purchase-controls">
-                <input type="number" value="1" min="1">
-                <button class="btn-buy">Kosárba</button>
+                <input type="number" value="1" min="1" id="product-qty">
+                
+                <button class="btn-buy" id="add-to-cart-btn" 
+                    data-id="5" 
+                    data-name="Nike Air Force 1 Low Supreme White"
+                    data-price="55000"
+                    data-image="../img/termek5.webp">
+                    Kosárba
+                </button>
             </div>
 
             <h4>Termékleírás</h4>
-            <p>A Supreme visszavesz az agresszív márkajelzésből, és helyette egy egyszerű és finom dizájnt választ, az ikonikus piros Box Logót a fehér-fehér Air Force 1 Low sarkán. Az ezüst "AF1" embléma a cipőfűző alját fedi a perforált orr-rész közelében, míg a Nike Air márkajelzés a nyelvfalon és a sarokrészen teszi teljessé a megjelenést. A cipő egy fehér bőr felsőrészt kapott, amelyet egy fehér középtalp és egy fehér külső talp egészít ki, így a Supreme logója és a részletek igazán kiemelkednek.</p>
+            <p>A Nike Air Force 1 07 Triple White sneaker egy igazán egyszerű, de sikkes darab...</p>
+        </div>
     </section>
 
     <section class="related-products">
@@ -102,6 +110,22 @@
             </div>
         </div>
     </section>
+
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Kosarad</h3>
+            <span class="close-cart" id="close-cart"><i class="fa-solid fa-xmark"></i></span>
+        </div>
+        <div class="cart-items" id="cart-items-container"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Összesen:</span>
+                <span id="sidebar-total">0 Ft</span>
+            </div>
+            <button class="btn-checkout" onclick="window.location.href='../html/kosar.html'">Kosár megtekintése</button>
+        </div>
+    </div>
 
     <footer class="footer-simple">
         <p>&copy; 2024 SNKRSSTORE. Minden jog fenntartva.</p>

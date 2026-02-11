@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pénztár | SNKRSSTORE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo"><a href="index.html">SNKRS<span>STORE</span></a></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Főoldal</a></li>
+                <li><a href="webshop.html">Webshop</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="checkout-page">
+        <div class="checkout-container">
+            <div class="checkout-form-section">
+                <h1>Pénztár</h1>
+                <form id="checkout-form">
+                    <section class="form-group-block">
+                        <h3>Szállítási adatok</h3>
+                        <div class="form-row">
+                            <input type="email" placeholder="E-mail cím" required class="full-width">
+                        </div>
+                        <div class="form-row">
+                            <div class="half-width"><input type="text" placeholder="Vezetéknév" required></div>
+                            <div class="half-width"><input type="text" placeholder="Keresztnév" required></div>
+                        </div>
+                        <div class="form-row"><input type="text" placeholder="Utca, házszám" required class="full-width"></div>
+                        <div class="form-row">
+                            <div class="half-width"><input type="text" placeholder="Irányítószám" required></div>
+                            <div class="half-width"><input type="text" placeholder="Város" required></div>
+                        </div>
+                        <div class="form-row"><input type="tel" placeholder="Telefonszám" required class="full-width"></div>
+                    </section>
+
+                    <section class="form-group-block">
+                        <h3>Fizetési mód</h3>
+                        <div class="payment-options">
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="card" checked>
+                                <span><i class="fa-regular fa-credit-card"></i> Bankkártya</span>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="cod">
+                                <span><i class="fa-solid fa-truck"></i> Utánvét (+500 Ft)</span>
+                            </label>
+                        </div>
+                    </section>
+
+                    <button type="submit" class="btn-submit-order">Megrendelés elküldése</button>
+                </form>
+            </div>
+
+            <div class="checkout-summary-section">
+                <div class="summary-card">
+                    <h3>Rendelés összegzése</h3>
+                    <div id="checkout-items-list" class="checkout-items-list"></div>
+                    <div class="summary-totals">
+                        <div class="row"><span>Részösszeg</span><span id="checkout-subtotal">0 Ft</span></div>
+                        <div class="row"><span>Szállítás</span><span id="checkout-shipping">Ingyenes</span></div>
+                        <hr>
+                        <div class="row total"><span>Végösszeg</span><span id="checkout-total">0 Ft</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header"><h3>Kosár</h3><span class="close-cart" id="close-cart"><i class="fa-solid fa-xmark"></i></span></div>
+        <div class="cart-items" id="cart-items-container"></div>
+    </div>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

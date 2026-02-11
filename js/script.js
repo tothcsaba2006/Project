@@ -1,139 +1,187 @@
-// Kosár számláló kezelése
-let count = 0;
-const cartCountElement = document.getElementById('cart-count');
-
-// Eseményfigyelő a kosár ikonokhoz
-document.addEventListener('click', function(e) {
-    if (e.target.classList.contains('cart-btn-icon')) {
-        e.stopPropagation(); // Megakadályozza a kártyára való kattintást
-        count++;
-        cartCountElement.innerText = count;
-        
-        // Vizuális visszajelzés
-        e.target.style.transform = "scale(1.3)";
-        setTimeout(() => {
-            e.target.style.transform = "scale(1)";
-        }, 200);
-    }
-});
-
-// auth.js
 document.addEventListener('DOMContentLoaded', () => {
-  const tabLogin = document.getElementById('tab-login');
-  const tabRegister = document.getElementById('tab-register');
-  const loginForm = document.getElementById('login-form');
-  const registerForm = document.getElementById('register-form');
+    
+    // --- 1. UI ELEMEK ---
+    const cartIcon = document.querySelector('.cart-icon');
+    const cartSidebar = document.getElementById('cart-sidebar');
+    const cartOverlay = document.getElementById('cart-overlay');
+    const closeCartBtn = document.getElementById('close-cart');
+    const sidebarItemsContainer = document.getElementById('cart-items-container');
+    const sidebarTotalElement = document.getElementById('sidebar-total');
+    const cartCountBadge = document.getElementById('cart-count');
+    
+    // Termék oldal elemek
+    const addToCartBtn = document.getElementById('add-to-cart-btn');
+    const productSizeSelect = document.getElementById('product-size');
+    const productQtyInput = document.getElementById('product-qty');
 
-  tabLogin.addEventListener('click', () => {
-    tabLogin.classList.add('active');
-    tabRegister.classList.remove('active');
-    loginForm.classList.remove('hidden');
-    registerForm.classList.add('hidden');
-  });
+    // Rendelés oldal elemek
+    const checkoutItemsList = document.getElementById('checkout-items-list');
+    const checkoutSubtotal = document.getElementById('checkout-subtotal');
+    const checkoutTotal = document.getElementById('checkout-total');
+    const checkoutForm = document.getElementById('checkout-form');
 
-  tabRegister.addEventListener('click', () => {
-    tabRegister.classList.add('active');
-    tabLogin.classList.remove('active');
-    registerForm.classList.remove('hidden');
-    loginForm.classList.add('hidden');
-  });
+    // --- 2. KOSÁR LOGIKA (LOCALSTORAGE) ---
 
-  // toggle password visibility
-  document.querySelectorAll('.toggle-pass').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const input = btn.parentElement.querySelector('input');
-      if (!input) return;
-      input.type = input.type === 'password' ? 'text' : 'password';
-      btn.querySelector('i').classList.toggle('fa-eye-slash');
-    });
-  });
+    function loadCart() {
+        const cart = JSON.parse(localStorage.getItem('snkrs_cart')) || [];
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-  // password strength helper
-  const pwStrengthText = document.getElementById('pw-strength-text');
-  const regPassword = document.getElementById('reg-password');
-  regPassword.addEventListener('input', () => {
-    const val = regPassword.value;
-    let score = 0;
-    if (val.length >= 8) score++;
-    if (/[A-Z]/.test(val)) score++;
-    if (/[0-9]/.test(val)) score++;
-    if (/[^A-Za-z0-9]/.test(val)) score++;
-    const labels = ['Gyenge','Közepes','Erős','Nagyon erős'];
-    pwStrengthText.textContent = val.length === 0 ? '—' : labels[Math.max(0, score-1)];
-  });
-
-  // register submit
-  registerForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const name = document.getElementById('reg-name').value.trim();
-    const email = document.getElementById('reg-email').value.trim();
-    const password = document.getElementById('reg-password').value;
-    const password2 = document.getElementById('reg-password2').value;
-    const msg = document.getElementById('register-msg');
-
-    msg.textContent = '';
-
-    if (!name || !email || !password) {
-      msg.textContent = 'Kérlek tölts ki minden mezőt.';
-      return;
-    }
-    if (password !== password2) {
-      msg.textContent = 'A jelszavak nem egyeznek.';
-      return;
-    }
-    if (password.length < 8) {
-      msg.textContent = 'A jelszónak legalább 8 karakter hosszúnak kell lennie.';
-      return;
+        if(cartCountBadge) cartCountBadge.innerText = cart.length;
+        if(sidebarItemsContainer) renderSidebar(cart, total);
+        if(checkoutItemsList) renderCheckoutPage(cart, total);
     }
 
-    try {
-      const res = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password })
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || 'Hiba a regisztráció során');
-      msg.style.color = '#1ab60c';
-      msg.textContent = 'Sikeres regisztráció. Átirányítás...';
-      // opcionális: átirányítás bejelentkezésre vagy profilra
-      setTimeout(() => window.location.href = '/profile.html', 900);
-    } catch (err) {
-      msg.style.color = '#ffcc00';
-      msg.textContent = err.message;
-    }
-  });
+    function addToCart(product) {
+        let cart = JSON.parse(localStorage.getItem('snkrs_cart')) || [];
+        const existingItem = cart.find(item => item.id === product.id && item.size === product.size);
 
-  // login submit
-  loginForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = document.getElementById('login-email').value.trim();
-    const password = document.getElementById('login-password').value;
-    const remember = document.getElementById('remember-me').checked;
-    const msg = document.getElementById('login-msg');
+        if (existingItem) {
+            existingItem.quantity += product.quantity;
+        } else {
+            cart.push(product);
+        }
 
-    msg.textContent = '';
-
-    if (!email || !password) {
-      msg.textContent = 'Kérlek tölts ki minden mezőt.';
-      return;
+        localStorage.setItem('snkrs_cart', JSON.stringify(cart));
+        loadCart();
+        openCart();
     }
 
-    try {
-      const res = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password, remember })
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || 'Hiba a bejelentkezés során');
-      msg.style.color = '#1ab60c';
-      msg.textContent = 'Sikeres bejelentkezés. Átirányítás...';
-      // token kezelése a backendtől függően
-      setTimeout(() => window.location.href = '/profile.html', 700);
-    } catch (err) {
-      msg.style.color = '#ffcc00';
-      msg.textContent = err.message;
+    function removeFromCart(productId, size) {
+        let cart = JSON.parse(localStorage.getItem('snkrs_cart')) || [];
+        cart = cart.filter(item => !(item.id === productId && item.size === size));
+        localStorage.setItem('snkrs_cart', JSON.stringify(cart));
+        loadCart();
     }
-  });
+
+    // --- 3. MEGJELENÍTÉS ---
+
+    // Sidebar Renderelés
+    function renderSidebar(items, total) {
+        sidebarItemsContainer.innerHTML = '';
+        
+        // OKOS ÚTVONAL KEZELÉS A GOMBHOZ
+        let checkoutLink = 'rendeles.html'; // Alapértelmezett (ha html mappában vagyunk)
+        
+        // Ha a "termekek" mappában vagyunk, akkor ki kell lépni és be a html-be
+        if (window.location.pathname.includes('/termekek/')) {
+            checkoutLink = '../html/rendeles.html';
+        }
+
+        // Sidebar Footer HTML
+        const footerHTML = `
+            <div class="cart-total">
+                <span>Összesen:</span>
+                <span id="sidebar-total">${total.toLocaleString()} Ft</span>
+            </div>
+            <button class="btn-checkout" onclick="window.location.href='${checkoutLink}'">
+                Tovább a pénztárhoz
+            </button>
+        `;
+
+        // Keressük meg a cart-footer-t és frissítsük, VAGY ha nincs, illesszük be
+        const existingFooter = document.querySelector('.cart-footer');
+        if(existingFooter) {
+            existingFooter.innerHTML = footerHTML;
+        }
+
+        if(items.length === 0) {
+            sidebarItemsContainer.innerHTML = '<p style="color:#888;text-align:center; margin-top:20px">Üres a kosár</p>';
+            if(existingFooter) existingFooter.querySelector('span').innerText = '0 Ft'; // Csak az összeget nullázzuk
+            return;
+        }
+
+        items.forEach(item => {
+            // Törlés gombnál figyelni kell a string idézőjelekre
+            const sizeParam = item.size ? `'${item.size}'` : 'null';
+            
+            sidebarItemsContainer.innerHTML += `
+                <div class="sidebar-item">
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="sidebar-item-info">
+                        <h4>${item.name}</h4>
+                        <p>${item.quantity} x ${item.price.toLocaleString()} FT</p>
+                        ${item.size ? `<span style="font-size:11px; color:#888">Méret: ${item.size}</span>` : ''}
+                    </div>
+                    <i class="fa-solid fa-trash remove-btn" 
+                       style="cursor:pointer; color:#ff4444; margin-left:auto;"
+                       onclick="removeItem('${item.id}', ${sizeParam})"></i>
+                </div>
+            `;
+        });
+        
+        // Globális segédfüggvény a HTML onclick-hez
+        window.removeItem = (id, size) => removeFromCart(id, size);
+    }
+
+    // Rendelés oldal összegzés
+    function renderCheckoutPage(items, total) {
+        checkoutItemsList.innerHTML = '';
+        if(items.length === 0) {
+            checkoutItemsList.innerHTML = '<p>Üres a kosarad.</p>';
+            checkoutSubtotal.innerText = '0 Ft';
+            checkoutTotal.innerText = '0 Ft';
+            return;
+        }
+        items.forEach(item => {
+            checkoutItemsList.innerHTML += `
+                <div class="summary-item">
+                    <img src="${item.image}" alt="termék">
+                    <div>
+                        <p>${item.name}</p>
+                        <small>Méret: ${item.size || '-'} | Mennyiség: ${item.quantity}</small>
+                    </div>
+                    <p>${(item.price * item.quantity).toLocaleString()} Ft</p>
+                </div>
+            `;
+        });
+        checkoutSubtotal.innerText = `${total.toLocaleString()} Ft`;
+        checkoutTotal.innerText = `${total.toLocaleString()} Ft`;
+    }
+
+    // --- 4. ESEMÉNYEK ---
+
+    function openCart() {
+        cartSidebar.classList.add('open');
+        cartOverlay.classList.add('open');
+    }
+    function closeCart() {
+        cartSidebar.classList.remove('open');
+        cartOverlay.classList.remove('open');
+    }
+
+    if(cartIcon) cartIcon.addEventListener('click', (e) => { e.preventDefault(); openCart(); });
+    if(closeCartBtn) closeCartBtn.addEventListener('click', closeCart);
+    if(cartOverlay) cartOverlay.addEventListener('click', closeCart);
+
+    // KOSÁRBA RAKÁS (Termék oldal)
+    if(addToCartBtn) {
+        addToCartBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const size = productSizeSelect ? productSizeSelect.value : null;
+            if(productSizeSelect && !size) { alert("Válassz méretet!"); return; }
+
+            const product = {
+                id: addToCartBtn.dataset.id,
+                name: addToCartBtn.dataset.name,
+                price: parseInt(addToCartBtn.dataset.price),
+                image: addToCartBtn.dataset.image,
+                quantity: parseInt(productQtyInput ? productQtyInput.value : 1),
+                size: size
+            };
+            addToCart(product);
+        });
+    }
+
+    // RENDELÉS LEADÁS
+    if(checkoutForm) {
+        checkoutForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert("Köszönjük a rendelésed!");
+            localStorage.removeItem('snkrs_cart');
+            window.location.href = 'index.html';
+        });
+    }
+
+    // Betöltés
+    loadCart();
 });
